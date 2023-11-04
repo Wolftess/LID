@@ -97,9 +97,9 @@ def anonym_detection(string):
 
 
 
-MODEL_roBERTa_trained = 'model/'
+MODEL_roBERTa_trained = 'model/tf_model.h5'
 
-model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained)
+model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained('model/tf_model.h5')
 st.write('check1')
 MODEL_roBERTa = 'jplu/tf-xlm-roberta-base'
 tokenizer = AutoTokenizer.from_pretrained(MODEL_roBERTa)
