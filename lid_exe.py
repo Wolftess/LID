@@ -101,19 +101,22 @@ def anonym_detection(string):
 MODEL_roBERTa_trained = 'model'
 
 model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained)
-
+st.write('check1')
 MODEL_roBERTa = 'jplu/tf-xlm-roberta-base'
 tokenizer = AutoTokenizer.from_pretrained(MODEL_roBERTa)
 
+st.write('check2')
 
 with open('linguistic_resources/label_dict_multi_ling_moredata_50000.pkl', 'rb') as f:
   label_dict = pkl.load(f)
 
 
+st.write('check3')
 
 nltk.download('punkt')
+st.write('check4')
 
-'''
+
 def predict(tokenizer, model, data, ner_labels):
   all_predictions = []
   all_predictions_in_sublists = []
