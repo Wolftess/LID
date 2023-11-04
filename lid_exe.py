@@ -12,9 +12,9 @@ from nltk.tokenize import sent_tokenize
 from nltk.tokenize.treebank import TreebankWordDetokenizer
 
 
-#st.write('All imported')
-#st.write(tf.__version__)
-#st.write(transformers.__version__)
+st.write('All imported')
+st.write(tf.__version__)
+
 
 smiley_icons = []
 with open('linguistic_resources/smiley_icons.txt', 'r') as f:
@@ -224,7 +224,7 @@ def main_language(labels):
 def final_prediction():
   german_languages = ['bavarian', 'swabian', 'swiss german', 'low german (low saxon)', 'yiddish', 'hunsrik', 'kölsch', 'pennsylvania german', 'palatine german']
   not_language_labels = ["PUNCT", "EMOT", "ANONYM", "NUM"]
-  text_to_predict = input('Please enter the phrase that should be classified:')
+  text_to_predict = st.text_input('Please enter the phrase that should be classified:', '')
 
   didi_predicted_data = predict(tokenizer, model_roBERTa_loaded, text_to_predict, ner_labels=list(label_dict.values()))
   predicted_labels = didi_predicted_data[0]
