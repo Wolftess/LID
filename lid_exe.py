@@ -239,9 +239,9 @@ def final_prediction():
     final_label = main_language(labels)
     label_distribution = Counter(labels)
     for token, label in zip(sentence, labels):
-      print(token, label)
+      st.write(token, label)
 
-    print(label_distribution)
+    st.write(label_distribution)
 
     other_languages = []
     for language in list(label_distribution.keys()):
@@ -249,9 +249,9 @@ def final_prediction():
         other_languages.append(language)
 
     if other_languages:
-      print(f" ==> \t Besides {final_label}, this sentence contains words in {' and '.join(other_languages)}.\n")
+      st.write(f" ==> \t Besides {final_label}, this sentence contains words in {' and '.join(other_languages)}.\n")
     else:
-        print(f" ==> \t The language of this sentence is {final_label}.\n")
+        st.write(f" ==> \t The language of this sentence is {final_label}.\n")
 
 
 final_prediction()
