@@ -98,7 +98,7 @@ def anonym_detection(string):
 
 
 
-MODEL_roBERTa_trained = 'model/model_roBERTa_multi_ling_moredata_50000'
+MODEL_roBERTa_trained = 'model'
 
 model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained)
 
