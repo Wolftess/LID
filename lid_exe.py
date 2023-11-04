@@ -97,7 +97,7 @@ def anonym_detection(string):
         return True
 
 
-
+'''
 MODEL_roBERTa_trained = 'model/model_roBERTa_multi_ling_moredata_50000'
 
 model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained)
@@ -255,3 +255,4 @@ def final_prediction():
 
 
 final_prediction()
+'''
