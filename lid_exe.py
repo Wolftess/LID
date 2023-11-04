@@ -116,7 +116,7 @@ st.write('check3')
 nltk.download('punkt')
 st.write('check4')
 
-
+'''
 def predict(tokenizer, model, data, ner_labels):
   all_predictions = []
   all_predictions_in_sublists = []
