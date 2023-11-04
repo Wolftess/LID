@@ -1,4 +1,4 @@
-#import streamlit as st
+import streamlit as st
 import tensorflow as tf
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer
 import re
