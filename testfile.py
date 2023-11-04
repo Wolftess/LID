@@ -2,5 +2,5 @@ import streamlit as st
 import tensorflow as tf
 import transformers
 
-print('All imported')
-print(tf.__version__)
+st.write('All imported')
+st.write(tf.__version__)
