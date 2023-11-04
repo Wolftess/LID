@@ -97,7 +97,7 @@ def anonym_detection(string):
         return True
 
 
-'''
+
 MODEL_roBERTa_trained = 'model/model_roBERTa_multi_ling_moredata_50000'
 
 model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained)
@@ -113,7 +113,7 @@ with open('linguistic_resources/label_dict_multi_ling_moredata_50000.pkl', 'rb')
 
 nltk.download('punkt')
 
-
+'''
 def predict(tokenizer, model, data, ner_labels):
   all_predictions = []
   all_predictions_in_sublists = []
