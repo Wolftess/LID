@@ -8,6 +8,7 @@ tensorflow = "==2.14.0"
 transformers = "==4.34.1"
 nltk = "==3.8.1"
 pandas = "==1.5.3"
+sentencepiece = "==0.1.99"
 
 [dev-packages]
 
