@@ -21,7 +21,7 @@ with open('linguistic_resources/smiley_icons.txt', 'r') as f:
     for smiley in f:
         smiley_icons.append(smiley.strip())
 
-# the following code lines are an emoji and smiley detector, partially taken from the web.
+# the following code lines are emoji and smiley detectors, partially taken from the web.
 # the smiley detection was added to the code found on the below websites
 def emoji_detection(string, smiley_list=smiley_icons):
     # Ref: https://gist.github.com/Alex-Just/e86110836f3f93fe7932290526529cd1#gistcomment-3208085
