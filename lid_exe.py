@@ -114,9 +114,11 @@ st.write('Dictionary loaded')
 def load_model():
     MODEL_roBERTa_trained_path = 'model/'
     model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained_path, local_files_only=True)
-    return model_roBERTa_loaded
+    MODEL_roBERTa = 'jplu/tf-xlm-roberta-base'
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_roBERTa)
+    return model_roBERTa_loaded, tokenizer
 
-model_roBERTa_loaded = load_model()
+model_roBERTa_loaded, tokenizer = load_model()
 st.write('Model loaded')
 
 
