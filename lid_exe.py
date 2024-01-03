@@ -15,14 +15,18 @@ from nltk.tokenize.treebank import TreebankWordDetokenizer
 st.write('All imported')
 st.write(tf.__version__)
 
+@st.cache_data
+def load_smileys():
+    smiley_icons = []
+    with open('linguistic_resources/smiley_icons.txt', 'r') as f:
+        for smiley in f:
+            smiley_icons.append(smiley.strip())
+    return smiley_icons
 
-smiley_icons = []
-with open('linguistic_resources/smiley_icons.txt', 'r') as f:
-    for smiley in f:
-        smiley_icons.append(smiley.strip())
-
+smiley_icons = load_smileys()
 # the following code lines are emoji and smiley detectors, partially taken from the web.
 # the smiley detection was added to the code found on the below websites
+
 def emoji_detection(string, smiley_list=smiley_icons):
     # Ref: https://gist.github.com/Alex-Just/e86110836f3f93fe7932290526529cd1#gistcomment-3208085
     # Ref: https://en.wikipedia.org/wiki/Unicode_block
@@ -95,27 +99,31 @@ def anonym_detection(string):
     if re.match(anonym_pattern, string):
         return True
 
+st.write('Recognizer functions loaded')
 
-print('Loading the model...')
-MODEL_roBERTa_trained = 'model/'
-
-#model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained, local_files_only=True)
-st.write('check1')
-MODEL_roBERTa = 'jplu/tf-xlm-roberta-base'
-tokenizer = AutoTokenizer.from_pretrained(MODEL_roBERTa)
-
-st.write('check2')
-
-with open('linguistic_resources/label_dict_multi_ling_moredata_50000.pkl', 'rb') as f:
-  label_dict = pkl.load(f)
+@st.cache_data
+def load_dictionary():
+    with open('linguistic_resources/label_dict_multi_ling_moredata_50000.pkl', 'rb') as f:
+      label_dict = pkl.load(f)
+    return label_dict
+label_dict = load_dictionary()
 
 
-st.write('check3')
+st.write('Dictionary loaded')
+@st.cache_resource
+def load_model():
+    MODEL_roBERTa_trained_path = 'model/'
+    model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained_path, local_files_only=True)
+    return model_roBERTa_loaded
+
+model_roBERTa_loaded = load_model()
+st.write('Model loaded')
+
 
 nltk.download('punkt')
 st.write('check4')
 
-'''
+
 def predict(tokenizer, model, data, ner_labels):
   all_predictions = []
   all_predictions_in_sublists = []
@@ -257,4 +265,3 @@ def final_prediction():
 
 
 final_prediction()
-'''
