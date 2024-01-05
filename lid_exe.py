@@ -11,6 +11,8 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize.treebank import TreebankWordDetokenizer
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 st.write('All imported')
 st.write(tf.__version__)
@@ -113,7 +115,7 @@ st.write('Dictionary loaded')
 @st.cache_resource
 def load_model():
     MODEL_roBERTa_trained_path = 'model/'
-    model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained_path, local_files_only=True)
+    model_roBERTa_loaded = TFAutoModelForTokenClassification.from_pretrained(MODEL_roBERTa_trained_path)
     MODEL_roBERTa = 'jplu/tf-xlm-roberta-base'
     tokenizer = AutoTokenizer.from_pretrained(MODEL_roBERTa)
     return model_roBERTa_loaded, tokenizer
@@ -121,8 +123,11 @@ def load_model():
 model_roBERTa_loaded, tokenizer = load_model()
 st.write('Model loaded')
 
+@st.cache_data
+def load_nltk_resources():
+    nltk.download('punkt')
+load_nltk_resources()
 
-nltk.download('punkt')
 st.write('check4')
 
 
@@ -236,9 +241,8 @@ def main_language(labels):
 def final_prediction():
   german_languages = ['bavarian', 'swabian', 'swiss german', 'low german (low saxon)', 'yiddish', 'hunsrik', 'kölsch', 'pennsylvania german', 'palatine german']
   not_language_labels = ["PUNCT", "EMOT", "ANONYM", "NUM"]
-  text_to_predict = st.text_input('Please enter the phrase that should be classified:', '')
-
-  didi_predicted_data = predict(tokenizer, model_roBERTa_loaded, text_to_predict, ner_labels=list(label_dict.values()))
+  input_text = st.text_input('Please enter the phrase that should be classified:', '')
+  didi_predicted_data = predict(tokenizer, model_roBERTa_loaded, input_text, ner_labels=list(label_dict.values()))
   predicted_labels = didi_predicted_data[0]
   tokenized_texts = didi_predicted_data[1]
   predicted_labels_in_sublists = didi_predicted_data[2]
@@ -264,6 +268,5 @@ def final_prediction():
       st.write(f" ==> \t Besides {final_label}, this sentence contains words in {' and '.join(other_languages)}.\n")
     else:
         st.write(f" ==> \t The language of this sentence is {final_label}.\n")
-
 
 final_prediction()
